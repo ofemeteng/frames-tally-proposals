@@ -1,10 +1,12 @@
 import { FrameActionDataParsed } from "frames.js";
+import { setCursor } from "../data/cursor.js";
 const html = String.raw;
 
 export default {
   name: "poster",
-  logic: (message: FrameActionDataParsed) => {
+  logic: async(message: FrameActionDataParsed) => {
     if (message.buttonIndex == 1) {
+      await setCursor("");
       return `arbitrum`;
     }
   },

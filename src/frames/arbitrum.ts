@@ -7,6 +7,7 @@ const html = String.raw;
 
 async function fetchDelegate() {
   const cursor = await getCursor();
+  console.log("cursor: ", cursor);
   if (cursor == null || cursor == "") {
     const response = await fetch("https://api.tally.xyz/query", {
       method: "POST",
@@ -50,7 +51,7 @@ async function fetchDelegate() {
               isSeekingDelegation: true,
             },
             page: {
-              limit: 1,
+              limit: 2,
             },
           },
         },
@@ -63,7 +64,9 @@ async function fetchDelegate() {
 
     const data = await response.json();
 
-    return data.data.delegates; // Return a single delegate
+    
+
+    return data.data.delegates;
   } else {
     const response = await fetch("https://api.tally.xyz/query", {
       method: "POST",
@@ -108,7 +111,7 @@ async function fetchDelegate() {
             },
             page: {
               afterCursor: cursor,
-              limit: 1,
+              limit: 2,
             },
           },
         },
@@ -121,15 +124,26 @@ async function fetchDelegate() {
 
     const data = await response.json();
 
-    return data.data.delegates; // Return a single delegate
+    return data.data.delegates;
   }
 
 }
 
 async function prepareContent(delegate) {
   // Generate buttons
-  const address = delegate.nodes[0].account.address;
-  const link = `https://www.tally.xyz/profile/${address}?governanceId=eip155:42161:0xf07DeD9dC292157749B6Fd268E37DF6EA38395B9`;
+  const cursor = await getCursor();
+  let address;
+  let link_address;
+
+  if (cursor == null || cursor == "") {
+    address = delegate.nodes[0].account.address;
+    link_address = delegate.nodes[1].account.address;
+  } else {
+    address = delegate.nodes[0].account.address;
+    link_address = delegate.nodes[1].account.address;
+  }
+
+  const link = `https://www.tally.xyz/profile/${link_address}?governanceId=eip155:42161:0xf07DeD9dC292157749B6Fd268E37DF6EA38395B9`;
 
   const buttonsHtml = `<frame-image layout="main">
         <div
@@ -170,12 +184,11 @@ export default {
       return `arbitrum`;
     }
     if (message.buttonIndex == 3) {
-      // await setCursor("");
+      await setCursor("");
       return `poster`;
     }
   },
   content: async () => {
-    
     return html` ${html({ raw: [htmlContent] })} `;
   },
 };
