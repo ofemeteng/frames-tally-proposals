@@ -73,6 +73,8 @@ link = `https://www.tally.xyz/profile/${address}?governanceId=eip155:42161:0xf07
 
 console.log("address: ", address);
 console.log("link: ", link);
+console.log("hiiiiii from next frame!");
+
 
 async function prepareContent(address, link) {
   // Generate buttons

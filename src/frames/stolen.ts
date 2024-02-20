@@ -1,5 +1,4 @@
 const html = String.raw;
-
 export default {
     name: 'poster',
     logic: () => null,

@@ -5,7 +5,7 @@ export default {
   name: "poster",
   logic: (message: FrameActionDataParsed) => {
     if (message.buttonIndex == 1) {
-      return `first`;
+      return `arbitrum`;
     }
   },
   content: () => html`
