@@ -27,19 +27,17 @@ export default async (req) => {
   else if (frameName && message) {
     const targetFrame = frames[frameName];
     const frameMarkup = await targetFrame.content(message);
-    const frameMarkupInLayout = mainLayout(frameMarkup, message)
+    const frameMarkupInLayout = mainLayout(frameMarkup, message);
 
-    const svg = await satori(
-      html(frameMarkupInLayout), 
-      {
-        width: 1200,
-        height: 630,
-        fonts: fonts,
-      }
-    );
+    const svg = await satori(html(frameMarkupInLayout), {
+      width: 1200,
+      height: 630,
+      fonts: fonts,
+    });
     const svgBuffer = Buffer.from(svg);
     const png = sharp(svgBuffer).png();
     responseBuffer = await png.toBuffer();
+
   } else {
     throw new Error("Insufficient parameters provided for image generation.");
   }

@@ -78,9 +78,9 @@ const respondWithFrame = async (
   const index = await landingPage(frame);
   const options: GetFrameHtmlOptions = {
     og: {
-        title: '🔳 Tally Active Proposals',
+        title: '🔵 Tally API - Arbitrum DAO Delegates',
     },
-    title: '🔳 Tally Active Proposals',
+    title: '🔵 Tally API - Arbitrum DAO Delegates',
     htmlBody: index.body,
     htmlHead: index.head
   };

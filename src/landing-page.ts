@@ -39,7 +39,7 @@ export default async (frameContent) => {
     </style>
   `;
   const body = html`
-    <h1>🔳 Tally Active Proposals</h1>
+    <h1>Tally API - Arbitrum DAO Delegates</h1>
     <figure>
       <img width="600" src="${frameContent.image}" />
     </figure>
